@@ -25,7 +25,6 @@ export const useAuthStore = defineStore("auth", () => {
       supabase.auth.signInWithPassword(form)
         .then(({data}) => {
         //   setLoading(true)
-          console.log(data);
             
           token.value = data.session.access_token
 
@@ -87,16 +86,12 @@ export const useAuthStore = defineStore("auth", () => {
       supabase.auth.signOut()
         .then(response => {
           token.value = null
-          router.push("/").then(() => {
-            router.go(0)
-          })
+          router.push("/")
           user.value = undefined
           resolve(response)
         })
         .catch(error => {
-          router.push("/").then(() => {
-            router.go(0)
-          })
+          router.push("/")
           reject(error)
         })
     })
