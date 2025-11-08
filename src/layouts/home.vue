@@ -60,7 +60,7 @@
         </v-list>
       </v-navigation-drawer>
   
-      <v-main style="height: 100vh;">
+      <v-main style="height: 100vh; overflow: auto;" >
         <div class="pa-4">
           <router-view />
         </div>
