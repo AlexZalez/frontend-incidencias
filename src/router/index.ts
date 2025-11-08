@@ -30,7 +30,6 @@ async function isAuth (to: RouteLocationNormalized,
       } else {
         next()
       }
-      console.log('123123');
     }
   } catch {
     // Si hay error pero está intentando acceder a login, permitir acceso
