@@ -18,17 +18,17 @@ import DialogCloseBtn from "@/components/general/DialogCloseBtn.vue"
     { title: "Acciones", value: "actions" },
   ]
 
-  const editIncident = (item) => {
+  function editIncident (item: any) {
     dialog.edit = true
     aIncident.value = item
   }
 
-  const deleteIncident = (item) => {
+  function deleteIncident (item: any) {
     dialog.delete = true
     aIncident.value = item
   }
 
-  const confirmDelete = async (item) => {
+  async function confirmDelete (item: any) {
     try {
       // Lógica para eliminar la incidencia usando aIncident.value
       dialog.delete = false
@@ -40,7 +40,7 @@ import DialogCloseBtn from "@/components/general/DialogCloseBtn.vue"
     
   }
 
-  const fetchIncidents = async () => {
+  async function fetchIncidents () {
     try {
         loading.incidents = true
       await incidentsListAction()

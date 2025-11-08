@@ -1,10 +1,9 @@
+<!-- eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain -->
 <script lang="ts" setup>
   import type { VForm } from 'vuetify/components'
   import { ref, reactive, computed, onMounted } from 'vue'
   import { supabase } from '@/lib/supabase'
   import rules from '@/utils/rules'
-import { useAuthStore } from '@/stores/auth'
-
   
   type Schema = 'new' | 'edit'
 
@@ -22,7 +21,7 @@ import { useAuthStore } from '@/stores/auth'
 
   const props = defineProps<{
     schema?: Schema
-    edit?: (any) => Promise<void>
+    edit?: (y: any, id: number) => Promise<void>
     model?: Partial<IncidentReport>
   }>()
 
@@ -34,7 +33,6 @@ import { useAuthStore } from '@/stores/auth'
   const loading = reactive({ submit: false })
 
   const finish = ref(false)
-
 
   const defaults: IncidentReport = {
     department: '',
@@ -75,8 +73,11 @@ import { useAuthStore } from '@/stores/auth'
       }
 
       if (props.schema == 'edit') {
-        await props.edit(payload, props.model?.id!)
-      }else{
+        if (props.edit === undefined) {
+          return
+        }
+        await props?.edit(payload, props.model?.id!)
+      } else {
         const { data, error } = await supabase
           .from('report_emergency_services')
           .insert({
