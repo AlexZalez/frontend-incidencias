@@ -81,12 +81,12 @@ export const useAuthStore = defineStore("auth", () => {
 
   */
   const userLogOutAction = () => {
-    useCookie("token").value = null
+    token.value = null
 
     return new Promise((resolve, reject) => {
       supabase.auth.signOut()
         .then(response => {
-          useCookie("token").value = null
+          token.value = null
           router.push("/").then(() => {
             router.go(0)
           })
